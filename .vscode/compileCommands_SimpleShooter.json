@@ -1,0 +1,27 @@
+[
+	{
+		"file": "D:\\\\Unreal Projects\\\\SimpleShooter\\\\Source\\\\SimpleShooter\\\\SimpleShooter.Build.cs",
+		"command": "cl.exe @\"D:\\Unreal Projects\\SimpleShooter\\.vscode\\compileCommands_SimpleShooter\\SimpleShooter.182.rsp\"",
+		"directory": "D:\\Epic Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SimpleShooter\\\\Source\\\\SimpleShooter\\\\SimpleShooter.cpp",
+		"command": "cl.exe @\"D:\\Unreal Projects\\SimpleShooter\\.vscode\\compileCommands_SimpleShooter\\SimpleShooter.182.rsp\"",
+		"directory": "D:\\Epic Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SimpleShooter\\\\Source\\\\SimpleShooter\\\\SimpleShooter.h",
+		"command": "cl.exe @\"D:\\Unreal Projects\\SimpleShooter\\.vscode\\compileCommands_SimpleShooter\\SimpleShooter.182.rsp\"",
+		"directory": "D:\\Epic Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SimpleShooter\\\\Source\\\\SimpleShooter\\\\SimpleShooterGameModeBase.cpp",
+		"command": "cl.exe @\"D:\\Unreal Projects\\SimpleShooter\\.vscode\\compileCommands_SimpleShooter\\SimpleShooter.182.rsp\"",
+		"directory": "D:\\Epic Games\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SimpleShooter\\\\Source\\\\SimpleShooter\\\\SimpleShooterGameModeBase.h",
+		"command": "cl.exe @\"D:\\Unreal Projects\\SimpleShooter\\.vscode\\compileCommands_SimpleShooter\\SimpleShooter.182.rsp\"",
+		"directory": "D:\\Epic Games\\UE_4.26\\Engine\\Source"
+	}
+]
