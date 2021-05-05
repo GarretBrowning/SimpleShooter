@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "ShooterCharacter.h"
 
 // Sets default values
@@ -30,5 +29,22 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &AShooterCharacter::MoveForward);
+	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &AShooterCharacter::MoveRight);
+
+	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
+
+	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+
 }
 
+void AShooterCharacter::MoveForward(float AxisValue) 
+{
+	AddMovementInput(GetActorForwardVector() * AxisValue);
+}
+
+void AShooterCharacter::MoveRight(float AxisValue) 
+{
+	AddMovementInput(GetActorRightVector() * AxisValue);
+}

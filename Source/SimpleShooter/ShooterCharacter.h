@@ -11,6 +11,10 @@ class SIMPLESHOOTER_API AShooterCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+private:
+	void MoveForward(float AxisValue);
+	void MoveRight(float AxisValue);
+
 public:
 	// Sets default values for this character's properties
 	AShooterCharacter();
