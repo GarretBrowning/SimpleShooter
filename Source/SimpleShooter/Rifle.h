@@ -27,6 +27,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float MaxRange = 1000.f;
 
+	UPROPERTY(EditAnywhere)
+	float Damage = 10.f;
+
 public:	
 	// Sets default values for this actor's properties
 	ARifle();
