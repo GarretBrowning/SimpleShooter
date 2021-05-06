@@ -28,11 +28,23 @@ void ARifle::PullTrigger()
 	AController* OwnerController = OwnerPawn->GetController();
 	if (OwnerController == nullptr) return;
 
-	FVector PlayerLocation;
-	FRotator PlayerRotation;
-	OwnerController->GetPlayerViewPoint(OUT PlayerLocation, OUT PlayerRotation);
+	FVector Location;
+	FRotator Rotation;
+	OwnerController->GetPlayerViewPoint(OUT Location, OUT Rotation);
 
-	DrawDebugCamera(GetWorld(), PlayerLocation, PlayerRotation, 90.f, 2.f, FColor::Red, true);
+	FVector End = Location + Rotation.Vector() * MaxRange;
+	// TODO: LineTrace
+	FHitResult Hit;
+	FCollisionQueryParams TraceParams;
+	TraceParams.AddIgnoredActor(this);
+	TraceParams.AddIgnoredActor(GetOwner());
+
+	bool bSuccess = GetWorld()->LineTraceSingleByChannel(OUT Hit, OUT Location, OUT End, ECollisionChannel::ECC_GameTraceChannel1, TraceParams);
+
+	if(bSuccess)
+	{
+		DrawDebugPoint(GetWorld(), Hit.Location, 20, FColor::Red, true);
+	}
 
 }
 

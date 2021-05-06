@@ -21,6 +21,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	UParticleSystem* MuzzleFlash;
 
+	UPROPERTY(EditAnywhere)
+	float MaxRange = 1000.f;
+
 public:	
 	// Sets default values for this actor's properties
 	ARifle();
