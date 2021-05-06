@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "ShooterCharacter.generated.h"
 
+class ARifle;
+
 UCLASS()
 class SIMPLESHOOTER_API AShooterCharacter : public ACharacter
 {
@@ -19,6 +21,12 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 75.f;
+
+	UPROPERTY(EditDefaultsOnly)			// Do not want to be able to edit this at runtime (it will already be spawned)
+	TSubclassOf<ARifle> RifleClass;		// Getting a blueprint class.
+
+	UPROPERTY()
+	ARifle* Rifle;						// This is ARifle Pointer, this is the actual Rifle.
 
 public:
 	// Sets default values for this character's properties
