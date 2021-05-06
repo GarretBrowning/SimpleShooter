@@ -15,6 +15,11 @@ ARifle::ARifle()
 	Mesh->SetupAttachment(Root);
 }
 
+void ARifle::PullTrigger() 
+{
+	UE_LOG(LogTemp, Warning, TEXT("You've been shot!"));
+}
+
 // Called when the game starts or when spawned
 void ARifle::BeginPlay()
 {
