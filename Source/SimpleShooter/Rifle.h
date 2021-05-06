@@ -18,12 +18,15 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* Mesh;
 
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* MuzzleFlash;
+
 public:	
 	// Sets default values for this actor's properties
 	ARifle();
 
 	void PullTrigger();
-	
+
 
 protected:
 	// Called when the game starts or when spawned

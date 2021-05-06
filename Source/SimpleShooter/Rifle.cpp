@@ -2,6 +2,10 @@
 
 #include "Rifle.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
+
+#define OUT
 
 // Sets default values
 ARifle::ARifle()
@@ -17,7 +21,19 @@ ARifle::ARifle()
 
 void ARifle::PullTrigger() 
 {
-	UE_LOG(LogTemp, Warning, TEXT("You've been shot!"));
+	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
+
+	APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	if (OwnerPawn == nullptr) return;
+	AController* OwnerController = OwnerPawn->GetController();
+	if (OwnerController == nullptr) return;
+
+	FVector PlayerLocation;
+	FRotator PlayerRotation;
+	OwnerController->GetPlayerViewPoint(OUT PlayerLocation, OUT PlayerRotation);
+
+	DrawDebugCamera(GetWorld(), PlayerLocation, PlayerRotation, 90.f, 2.f, FColor::Red, true);
+
 }
 
 // Called when the game starts or when spawned
