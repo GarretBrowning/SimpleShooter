@@ -43,7 +43,9 @@ void ARifle::PullTrigger()
 
 	if(bSuccess)
 	{
-		DrawDebugPoint(GetWorld(), Hit.Location, 20, FColor::Red, true);
+		FVector ShotDirection = -Rotation.Vector(); // Tells us where the shot came from (grabbing negative value).
+		// DrawDebugPoint(GetWorld(), Hit.Location, 20, FColor::Red, true);
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.Location, ShotDirection.Rotation());
 	}
 
 }
