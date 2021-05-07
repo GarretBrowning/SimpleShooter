@@ -23,33 +23,19 @@ void ARifle::PullTrigger()
 {
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
 
-	APawn* OwnerPawn = Cast<APawn>(GetOwner());
-	if (OwnerPawn == nullptr) return;
-	AController* OwnerController = OwnerPawn->GetController();
-	if (OwnerController == nullptr) return;
-
-	FVector Location;
-	FRotator Rotation;
-	OwnerController->GetPlayerViewPoint(OUT Location, OUT Rotation);
-
-	FVector End = Location + Rotation.Vector() * MaxRange;
-	// TODO: LineTrace
 	FHitResult Hit;
-	FCollisionQueryParams TraceParams;
-	TraceParams.AddIgnoredActor(this);
-	TraceParams.AddIgnoredActor(GetOwner());
-
-	bool bSuccess = GetWorld()->LineTraceSingleByChannel(OUT Hit, OUT Location, OUT End, ECollisionChannel::ECC_GameTraceChannel1, TraceParams);
+	FVector ShotDirection;
+	bool bSuccess = GunTrace(OUT Hit, OUT ShotDirection);
 
 	if(bSuccess)
 	{
-		FVector ShotDirection = -Rotation.Vector(); // Tells us where the shot came from (grabbing negative value).
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.Location, ShotDirection.Rotation());
 
 		AActor* HitActor = Hit.GetActor();
 		if (HitActor != nullptr)
 		{
 			FPointDamageEvent DamageEvent(Damage, Hit, ShotDirection, nullptr);
+			AController* OwnerController = GetOwnerController();
 			HitActor->TakeDamage(Damage, DamageEvent, OwnerController, this);
 		}
 	}
@@ -69,3 +55,30 @@ void ARifle::Tick(float DeltaTime)
 
 }
 
+bool ARifle::GunTrace(FHitResult& Hit, FVector& ShotDirection) 
+{
+	AController* OwnerController = GetOwnerController();
+	if (OwnerController == nullptr)
+	{
+		return false;
+	}
+
+	FVector Location;
+	FRotator Rotation;
+	OwnerController->GetPlayerViewPoint(OUT Location, OUT Rotation);
+	ShotDirection = -Rotation.Vector(); // Tells us where the shot came from (grabbing negative value).
+
+	FVector End = Location + Rotation.Vector() * MaxRange;
+	FCollisionQueryParams TraceParams;
+	TraceParams.AddIgnoredActor(this);
+	TraceParams.AddIgnoredActor(GetOwner());
+	return GetWorld()->LineTraceSingleByChannel(OUT Hit, OUT Location, OUT End, ECollisionChannel::ECC_GameTraceChannel1, TraceParams);
+}
+
+AController* ARifle::GetOwnerController() const
+{
+	APawn *OwnerPawn = Cast<APawn>(GetOwner());
+	if (OwnerPawn == nullptr)
+		return nullptr;
+	return OwnerPawn->GetController();
+}

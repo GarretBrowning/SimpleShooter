@@ -30,6 +30,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	float Damage = 10.f;
 
+	bool GunTrace(FHitResult& Hit, FVector& ShotDirection);
+
+	AController* GetOwnerController() const;
+
 public:	
 	// Sets default values for this actor's properties
 	ARifle();
