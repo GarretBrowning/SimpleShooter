@@ -21,9 +21,11 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	bool bHasLineOfSight = false;
-
 	UPROPERTY(EditAnywhere)
-	float AcceptanceRadius = 200.f;
+	class UBehaviorTree* AIBehavior;
+	// bool bHasLineOfSight = false;
+
+	// UPROPERTY(EditAnywhere)
+	// float AcceptanceRadius = 200.f;
 	
 };
