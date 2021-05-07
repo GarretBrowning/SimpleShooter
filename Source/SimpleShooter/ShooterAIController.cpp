@@ -15,7 +15,6 @@ void AShooterAIController::BeginPlay()
         FVector StartLocation = GetPawn()->GetActorLocation();
         GetBlackboardComponent()->SetValueAsVector(TEXT("StartLocation"), StartLocation);
     }
-    
 }
 
 void AShooterAIController::Tick(float DeltaSeconds) 
