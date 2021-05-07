@@ -23,7 +23,7 @@ protected:
 private:
 	UPROPERTY(EditAnywhere)
 	class UBehaviorTree* AIBehavior;
-	// bool bHasLineOfSight = false;
+	bool bHasLineOfSight = false;
 
 	// UPROPERTY(EditAnywhere)
 	// float AcceptanceRadius = 200.f;
