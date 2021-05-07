@@ -23,11 +23,18 @@ private:
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 75.f;
 
+	UPROPERTY(EditDefaultsOnly)
+	float MaxHealth = 100.f;
+
+	UPROPERTY(VisibleAnywhere)
+	float Health;
+
 	UPROPERTY(EditDefaultsOnly)			// Do not want to be able to edit this at runtime (it will already be spawned)
 	TSubclassOf<ARifle> RifleClass;		// Getting a blueprint class.
 
 	UPROPERTY()
 	ARifle* Rifle;						// This is ARifle Pointer, this is the actual Rifle.
+
 
 public:
 	// Sets default values for this character's properties
@@ -43,5 +50,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
 
 };
